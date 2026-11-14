@@ -1,0 +1,96 @@
+/*
+ * The Me menu.
+ *
+ * It fades the current screen out behind a white scrim — the reference screens
+ * fade to white, not to black — and the five rows rise into place one after
+ * another from the bottom, over the tab bar's Me button. The scrim stops below
+ * the tab bar, so the bar stays crisp above it.
+ */
+
+.root {
+  position: fixed;
+  top: 0;
+  bottom: calc(var(--tab-bar-height) + env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  width: 100%;
+  max-width: var(--app-width);
+  animation: fade-in 140ms var(--ease-out) both;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.items {
+  position: absolute;
+  right: var(--s-lg);
+  bottom: var(--s-md);
+  left: var(--s-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-sm);
+}
+
+.item {
+  animation: rise 220ms var(--ease-out) both;
+  animation-delay: calc(var(--index) * 45ms);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--s-md);
+  width: 100%;
+  text-align: left;
+  transition: opacity 120ms var(--ease-out);
+}
+
+.row:active {
+  opacity: 0.6;
+}
+
+.row:disabled {
+  cursor: default;
+  color: var(--c-muted);
+}
+
+.disc {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--c-brand-tint);
+  color: var(--c-brand);
+}
+
+.label {
+  flex: 1;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,29 @@
+.card {
+  gap: var(--s-xs);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--s-xs);
+}
+
+.headerText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.readings {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.readingRow {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-xs);
+}

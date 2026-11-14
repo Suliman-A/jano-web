@@ -1,0 +1,27 @@
+.tags,
+.slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-xs);
+}
+
+.slot {
+  padding: var(--s-xs) var(--s-md);
+  border-radius: var(--r-pill);
+  background: var(--c-brand-tint);
+  font-size: 13px;
+  font-weight: 600;
+  transition:
+    background 140ms var(--ease-out),
+    color 140ms var(--ease-out);
+}
+
+.slotSelected {
+  background: var(--c-brand);
+  color: var(--c-on-brand);
+}
+
+.error {
+  background: var(--c-danger-tint);
+  border-color: transparent;
+}

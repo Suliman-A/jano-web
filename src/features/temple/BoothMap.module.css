@@ -1,0 +1,72 @@
+/*
+ * A plain panel with a faint grid standing in for streets. It is explicitly
+ * illustrative — there are no tiles to be accurate against.
+ */
+
+.root {
+  position: relative;
+  height: 220px;
+  margin-bottom: var(--s-xxs);
+  border-radius: var(--r-card);
+  background-color: var(--c-brand-tint);
+  background-image:
+    linear-gradient(rgba(91, 75, 214, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91, 75, 214, 0.08) 1px, transparent 1px);
+  background-size: 34px 34px;
+  overflow: hidden;
+}
+
+.caption {
+  position: absolute;
+  top: var(--s-xs);
+  left: var(--s-xs);
+  padding: var(--s-xxs) var(--s-xs);
+  border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--c-muted);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pin {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  /* The anchor is the dot's tip, so the pin points at its coordinates. */
+  transform: translate(-50%, -100%);
+  transition: transform 140ms var(--ease-out);
+}
+
+.pin:hover,
+.pin:focus-visible {
+  transform: translate(-50%, -104%);
+}
+
+.dot {
+  width: 18px;
+  height: 18px;
+  border: 3px solid var(--c-surface);
+  border-radius: 50%;
+  background: var(--c-brand);
+  box-shadow: 0 1px 4px rgba(21, 18, 36, 0.3);
+}
+
+.pinLabel {
+  padding: 1px var(--s-xxs);
+  border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--c-ink);
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
