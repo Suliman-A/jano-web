@@ -1,0 +1,90 @@
+/*
+ * The bottom navigation from the reference screens.
+ *
+ * It is fixed to the bottom of the phone-width column, not of the viewport,
+ * so on a desktop browser it stays with the app rather than spanning the page.
+ * It sits above the Me menu's scrim, which is the point: the menu fades the
+ * screen behind it and the bar stays crisp.
+ */
+
+.bar {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  width: 100%;
+  max-width: var(--app-width);
+  padding-top: var(--s-xs);
+  padding-bottom: max(var(--s-sm), env(safe-area-inset-bottom));
+  background: var(--c-background);
+}
+
+.row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  min-height: calc(var(--tab-button-size) + var(--s-xl));
+  padding: 0 var(--s-lg);
+}
+
+/* Farm and Temple are a pair in the middle; only the gap between them is
+   wider than the padding around them. */
+.centre {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--s-xxl);
+}
+
+.button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  /* Every circle is the same size whatever its state, so tapping a tab never
+     resizes anything and the row never shifts under the finger. */
+  width: var(--tab-button-size);
+  height: var(--tab-button-size);
+  border-radius: 50%;
+  background: var(--c-brand-tint);
+  color: var(--c-ink);
+  transition:
+    background 160ms var(--ease-out),
+    color 160ms var(--ease-out),
+    opacity 120ms var(--ease-out);
+}
+
+.button:active {
+  opacity: 0.8;
+}
+
+.active {
+  background: var(--c-brand);
+  color: var(--c-on-brand);
+}
+
+/* Me and Jano sit a little above the two middle tabs. */
+.lifted {
+  margin-bottom: var(--s-xl);
+}
+
+.label {
+  text-align: center;
+}
+
+/* The wordmark sits between the lifted pair, as in the reference. */
+.wordmark {
+  position: absolute;
+  top: var(--s-xs);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, #e0309b 0%, #6b3fd4 55%, #3b2bb8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  pointer-events: none;
+}

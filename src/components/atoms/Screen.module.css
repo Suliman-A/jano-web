@@ -1,0 +1,9 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-sm);
+  padding: var(--s-md) var(--screen-padding);
+  /* Clears the fixed tab bar, plus the home indicator on a notched phone. */
+  padding-bottom: calc(var(--tab-bar-height) + env(safe-area-inset-bottom));
+  padding-top: calc(var(--s-md) + env(safe-area-inset-top));
+}

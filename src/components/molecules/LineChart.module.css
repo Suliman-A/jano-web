@@ -1,0 +1,34 @@
+.root {
+  margin: 0;
+  padding: var(--s-xs) 0;
+  border-radius: var(--r-input);
+  background: var(--c-surface);
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.labels {
+  display: flex;
+  margin-top: var(--s-xxs);
+}
+
+.label {
+  flex: 1;
+  font-size: 10px;
+  line-height: 14px;
+  text-align: center;
+  color: var(--c-muted);
+}
+
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s-lg) 0;
+  border-radius: var(--r-input);
+  background: var(--c-surface);
+}

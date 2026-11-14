@@ -1,0 +1,49 @@
+/**
+ * The palette, spacing scale and radii, taken from the reference screens.
+ * Every component reads these rather than hard-coding a colour or a gap.
+ */
+
+:root {
+  /* Palette */
+  --c-background: #ffffff;
+  --c-brand: #5b4bd6;
+  --c-brand-tint: #efecfc;
+  --c-danger: #cc2936;
+  --c-danger-tint: #fdedee;
+  --c-hairline: #e6e3f0;
+  --c-ink: #151224;
+  --c-muted: #6b6880;
+  --c-on-brand: #ffffff;
+  --c-surface: #ffffff;
+  --c-success: #1f9d55;
+  --c-success-tint: #e8f6ee;
+  --c-warning: #b45309;
+  --c-warning-tint: #fdf3e3;
+
+  /* The page behind the phone-width column, on a wide screen. */
+  --c-page: #f2f1f7;
+
+  /* Spacing scale */
+  --s-xxs: 4px;
+  --s-xs: 8px;
+  --s-sm: 12px;
+  --s-md: 16px;
+  --s-lg: 20px;
+  --s-xl: 24px;
+  --s-xxl: 32px;
+  --s-huge: 40px;
+
+  /* Radii */
+  --r-card: 20px;
+  --r-input: 14px;
+  --r-pill: 999px;
+
+  /* Layout */
+  --screen-padding: 20px;
+  --app-width: 430px;
+  --tab-bar-height: 120px;
+  --tab-button-size: 74px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}

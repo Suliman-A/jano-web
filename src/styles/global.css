@@ -1,0 +1,167 @@
+/**
+ * Reset, page frame and the type ramp.
+ *
+ * The ramp is a set of utility classes rather than a Text component: on the
+ * web the element already carries the meaning, so a heading is an `h1` with a
+ * size class rather than a `<Text variant>`.
+ */
+
+@import './tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--c-page);
+  color: var(--c-ink);
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: 100%;
+}
+
+h1,
+h2,
+h3,
+p,
+figure {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+input {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--c-brand);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* The phone-width column. On a wide screen it is centred on the page. */
+.app-frame {
+  position: relative;
+  width: 100%;
+  max-width: var(--app-width);
+  min-height: 100%;
+  margin: 0 auto;
+  background: var(--c-background);
+  overflow-x: clip;
+}
+
+@media (min-width: 480px) {
+  .app-frame {
+    box-shadow: 0 0 0 1px var(--c-hairline);
+  }
+}
+
+/* Type ramp */
+.t-hero {
+  font-size: 40px;
+  line-height: 46px;
+  font-weight: 700;
+}
+.t-screen-title {
+  font-size: 26px;
+  line-height: 32px;
+  font-weight: 700;
+}
+.t-title {
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 700;
+}
+.t-section-title {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+}
+.t-body {
+  font-size: 15px;
+  line-height: 21px;
+  font-weight: 400;
+}
+.t-label {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 600;
+}
+.t-caption {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+}
+.t-tab-label {
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 600;
+}
+
+/* Colour helpers */
+.c-muted {
+  color: var(--c-muted);
+}
+.c-brand {
+  color: var(--c-brand);
+}
+.c-danger {
+  color: var(--c-danger);
+}
+.c-success {
+  color: var(--c-success);
+}
+.c-warning {
+  color: var(--c-warning);
+}
+
+/* Visible to a screen reader only. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

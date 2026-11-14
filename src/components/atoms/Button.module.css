@@ -1,0 +1,44 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-xs);
+  min-height: 52px;
+  padding: var(--s-sm) var(--s-lg);
+  border-radius: var(--r-pill);
+  background: var(--c-brand);
+  color: var(--c-on-brand);
+  font-size: 15px;
+  font-weight: 600;
+  width: 100%;
+  transition: opacity 120ms var(--ease-out);
+}
+
+.button:active {
+  opacity: 0.85;
+}
+
+.secondary {
+  background: var(--c-brand-tint);
+  color: var(--c-brand);
+}
+
+.button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  animation: spin 700ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

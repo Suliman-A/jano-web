@@ -1,0 +1,14 @@
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-xxs);
+  align-self: flex-start;
+  padding: var(--s-xxs) var(--s-xs) var(--s-xxs) 0;
+  color: var(--c-brand);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.chevron {
+  transform: rotate(180deg);
+}

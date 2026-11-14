@@ -1,0 +1,52 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-xxs);
+  padding: var(--s-xs) var(--s-sm);
+  border-radius: var(--r-pill);
+  background: var(--c-brand-tint);
+  color: var(--c-ink);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 18px;
+  white-space: nowrap;
+}
+
+.selectable {
+  transition:
+    background 140ms var(--ease-out),
+    color 140ms var(--ease-out);
+}
+
+.selected {
+  background: var(--c-brand);
+  color: var(--c-on-brand);
+}
+
+.brand {
+  background: var(--c-brand-tint);
+  color: var(--c-brand);
+}
+
+.success {
+  background: var(--c-success-tint);
+  color: var(--c-success);
+}
+
+.warning {
+  background: var(--c-warning-tint);
+  color: var(--c-warning);
+}
+
+.neutral {
+  background: var(--c-brand-tint);
+  color: var(--c-muted);
+}
+
+/* The small dot the reference screens put before the range pill. */
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}

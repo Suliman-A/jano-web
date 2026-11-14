@@ -1,0 +1,27 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-xs);
+  padding: var(--s-md);
+  border: 1px solid var(--c-hairline);
+  border-radius: var(--r-card);
+  background: var(--c-surface);
+  text-align: left;
+  width: 100%;
+}
+
+.tinted {
+  background: var(--c-brand-tint);
+  border-color: transparent;
+}
+
+.pressable {
+  transition:
+    transform 120ms var(--ease-out),
+    opacity 120ms var(--ease-out);
+}
+
+.pressable:active {
+  transform: scale(0.99);
+  opacity: 0.9;
+}
