@@ -1,0 +1,72 @@
+.screen {
+  gap: var(--s-sm);
+}
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--s-sm);
+  border-radius: var(--r-input);
+  background: var(--c-ink);
+  color: var(--c-on-brand);
+}
+
+.booths {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-xs);
+}
+
+.input {
+  min-height: 72px;
+  padding: var(--s-sm);
+  border: 0;
+  border-radius: var(--r-input);
+  background: var(--c-brand-tint);
+  color: var(--c-ink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  line-height: 18px;
+  resize: vertical;
+  width: 100%;
+}
+
+.input::placeholder {
+  color: var(--c-muted);
+  font-family: inherit;
+}
+
+.link {
+  align-self: flex-start;
+  padding: var(--s-xxs) 0;
+  color: var(--c-brand);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.link:disabled {
+  color: var(--c-muted);
+  cursor: not-allowed;
+}
+
+.rejected {
+  gap: 2px;
+  background: var(--c-danger-tint);
+  border-color: transparent;
+}
+
+.accepted {
+  background: var(--c-success-tint);
+  border-color: transparent;
+}
+
+.readings {
+  gap: var(--s-xxs);
+}
+
+.readingRow {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-xs);
+}
