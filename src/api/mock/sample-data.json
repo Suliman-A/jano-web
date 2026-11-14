@@ -1,0 +1,169 @@
+{
+  "_note": "Sample data for a prototype. Sophia Alvarez is not a real person. Typical ranges are simplified and are not clinical guidance.",
+  "timezone": "Asia/Manila",
+  "patient": {
+    "id": "pt_demo_001",
+    "name": "Sophia Alvarez"
+  },
+  "boothFunctions": {
+    "basic": "Basic care",
+    "maternal": "Maternal care",
+    "physical_therapy": "Physical therapy",
+    "pediatric": "Pediatric care"
+  },
+  "booths": [
+    {
+      "id": "bth_ayala",
+      "name": "Ayala Avenue Booth",
+      "area": "Makati",
+      "functions": ["basic"],
+      "lat": 14.5547,
+      "lng": 121.0244,
+      "status": "open",
+      "hours": "08:00-20:00"
+    },
+    {
+      "id": "bth_poblacion",
+      "name": "Poblacion Booth",
+      "area": "Makati",
+      "functions": ["basic", "pediatric"],
+      "lat": 14.5649,
+      "lng": 121.0306,
+      "status": "open",
+      "hours": "10:00-22:00"
+    },
+    {
+      "id": "bth_shaw",
+      "name": "Shaw Boulevard Booth",
+      "area": "Mandaluyong",
+      "functions": ["basic", "maternal"],
+      "lat": 14.5814,
+      "lng": 121.0537,
+      "status": "open",
+      "hours": "08:00-18:00"
+    },
+    {
+      "id": "bth_highstreet",
+      "name": "High Street Booth",
+      "area": "Taguig (BGC)",
+      "functions": ["physical_therapy", "basic"],
+      "lat": 14.5509,
+      "lng": 121.0503,
+      "status": "open",
+      "hours": "07:00-21:00"
+    },
+    {
+      "id": "bth_ortigas",
+      "name": "Ortigas Center Booth",
+      "area": "Pasig",
+      "functions": ["maternal"],
+      "lat": 14.5869,
+      "lng": 121.0614,
+      "status": "maintenance",
+      "hours": "08:00-18:00"
+    },
+    {
+      "id": "bth_rockwell",
+      "name": "Rockwell Booth",
+      "area": "Makati",
+      "functions": ["pediatric"],
+      "lat": null,
+      "lng": null,
+      "status": "open",
+      "hours": "09:00-18:00"
+    }
+  ],
+  "slotRules": {
+    "lengthMinutes": 30,
+    "note": "Slots run within each booth's hours. Make a few slots unavailable in your mock API."
+  },
+  "metrics": [
+    {
+      "key": "blood_pressure",
+      "flower": "Hibiscus",
+      "label": "Blood pressure",
+      "unit": "mmHg",
+      "typical": {
+        "systolicBelow": 120,
+        "diastolicBelow": 80
+      },
+      "explain": "The pressure of blood against your artery walls: the top number when your heart beats, the bottom number between beats.",
+      "history": [
+        { "date": "2026-08-06", "systolic": 128, "diastolic": 82 },
+        { "date": "2026-08-27", "systolic": 132, "diastolic": 84 },
+        { "date": "2026-09-17", "systolic": 138, "diastolic": 88 },
+        { "date": "2026-10-08", "systolic": 145, "diastolic": 92 },
+        { "date": "2026-10-29", "systolic": 152, "diastolic": 96 }
+      ]
+    },
+    {
+      "key": "pulse",
+      "flower": "Tulip",
+      "label": "Pulse rate",
+      "unit": "bpm",
+      "typical": { "min": 60, "max": 100 },
+      "explain": "How many times your heart beats in a minute while you rest.",
+      "history": [
+        { "date": "2026-08-06", "value": 72 },
+        { "date": "2026-08-27", "value": 76 },
+        { "date": "2026-09-17", "value": 74 },
+        { "date": "2026-10-08", "value": 80 },
+        { "date": "2026-10-29", "value": 78 }
+      ]
+    },
+    {
+      "key": "spo2",
+      "flower": "Cornflower",
+      "label": "Blood oxygen",
+      "unit": "%",
+      "typical": { "min": 95, "max": 100 },
+      "explain": "An estimate of how much oxygen your blood is carrying.",
+      "history": [
+        { "date": "2026-08-06", "value": 97 },
+        { "date": "2026-08-27", "value": 98 },
+        { "date": "2026-09-17", "value": 97 },
+        { "date": "2026-10-08", "value": 99 },
+        { "date": "2026-10-29", "value": 98 }
+      ]
+    },
+    {
+      "key": "temperature",
+      "flower": "Marigold",
+      "label": "Body temperature",
+      "unit": "°C",
+      "typical": { "min": 36.1, "max": 37.2 },
+      "explain": "Your body temperature, measured at the booth.",
+      "history": [
+        { "date": "2026-08-06", "value": 36.6 },
+        { "date": "2026-08-27", "value": 36.8 },
+        { "date": "2026-09-17", "value": 37.9 },
+        { "date": "2026-10-08", "value": 36.5 },
+        { "date": "2026-10-29", "value": 36.7 }
+      ]
+    },
+    {
+      "key": "weight",
+      "flower": "Sunflower",
+      "label": "Body weight",
+      "unit": "kg",
+      "typical": null,
+      "explain": "Your weight, measured on the booth scale.",
+      "history": [
+        { "date": "2026-08-06", "value": 62.0 },
+        { "date": "2026-08-27", "value": 61.8 },
+        { "date": "2026-09-17", "value": null },
+        { "date": "2026-10-08", "value": 61.2 },
+        { "date": "2026-10-29", "value": 60.9 }
+      ]
+    },
+    {
+      "key": "body_fat",
+      "flower": "Hydrangea",
+      "label": "Body fat / composition",
+      "unit": "%",
+      "typical": null,
+      "explain": "An estimate of how much of your body weight is fat.",
+      "history": []
+    }
+  ]
+}
