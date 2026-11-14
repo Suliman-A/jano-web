@@ -7,11 +7,12 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "test": "vitest run",
+    "test": "vitest run && node scripts/check-doc-links.mjs",
     "test:watch": "vitest",
     "tscheck": "tsc -b --noEmit false --emitDeclarationOnly false",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "check:docs": "node scripts/check-doc-links.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.73.0",

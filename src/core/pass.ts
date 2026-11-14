@@ -2,8 +2,10 @@
  * @fileoverview The check-in pass: the string that goes into the QR code, and
  * the checks a booth can run on it without talking to a server.
  *
- * The code is readable on purpose rather than base64 — Hermes has no `btoa`,
- * and a pass you can print in a document is easier to reason about.
+ * The code is readable on purpose rather than base64: a pass you can print in
+ * a document, paste into the booth simulator and read in a test failure is
+ * easier to reason about, and encoding it would hide nothing — the payload is
+ * deliberately not secret.
  *
  *     jano.1.bkg_7fa2.bth_ayala.pt_demo_001.jti_4d9c1e.1763131200000
  *
