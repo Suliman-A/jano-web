@@ -5,7 +5,7 @@ medical booth (a "Temple"), carry a QR check-in pass, have the booth accept it
 and take measurements, and watch the visit land in Consultation History and the
 new readings appear on the Farm.
 
-**Live:** https://jano-web.vercel.app
+**Live:** https://suliman-a.github.io/jano-web/
 
 ## What it does
 
