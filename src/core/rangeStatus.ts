@@ -30,6 +30,15 @@ type BloodPressureTypical = {
   diastolicBelow: number;
 };
 
+/** A reading that actually carries both blood pressure numbers. */
+type BloodPressureReading = Reading & {
+  diastolic: number;
+  systolic: number;
+};
+
+/** A reading that actually carries a single measured value. */
+type ValueReading = Reading & { value: number };
+
 /**
  * Narrows a typical range to the blood pressure shape.
  * @param typical - The metric's typical range.
@@ -59,17 +68,21 @@ const toTime = (date: string): number => {
  * `null` (the booth tried and failed) is skipped rather than treated as zero —
  * so the status always describes the same number the card displays.
  *
+ * The guard is a type predicate rather than a plain boolean, so the reading
+ * that comes back is already narrowed and the caller needs no assertion to
+ * read the number it just filtered for.
+ *
  * @param history - Every reading recorded for the metric.
  * @param hasValue - Tells whether a reading carries the value we need.
- * @returns {Reading | null} - The reading to judge, or `null` when there is none.
+ * @returns {T | null} - The reading to judge, or `null` when there is none.
  */
-const latestUsable = (
+const latestUsable = <T extends Reading>(
   history: Reading[],
-  hasValue: (reading: Reading) => boolean,
-): Reading | null =>
+  hasValue: (reading: Reading) => reading is T,
+): T | null =>
   history
     .filter(hasValue)
-    .reduce<Reading | null>(
+    .reduce<T | null>(
       (latest, reading) =>
         latest === null || toTime(reading.date) > toTime(latest.date)
           ? reading
@@ -91,7 +104,7 @@ export const rangeStatus = (history: Reading[], typical: Typical): Status => {
   if (isBloodPressureTypical(typical)) {
     const latest = latestUsable(
       history,
-      (reading) =>
+      (reading): reading is BloodPressureReading =>
         typeof reading.systolic === 'number' &&
         typeof reading.diastolic === 'number',
     );
@@ -101,26 +114,26 @@ export const rangeStatus = (history: Reading[], typical: Typical): Status => {
     }
 
     const isAbove =
-      latest.systolic! >= typical.systolicBelow ||
-      latest.diastolic! >= typical.diastolicBelow;
+      latest.systolic >= typical.systolicBelow ||
+      latest.diastolic >= typical.diastolicBelow;
 
     return isAbove ? 'above' : 'in';
   }
 
   const latest = latestUsable(
     history,
-    (reading) => typeof reading.value === 'number',
+    (reading): reading is ValueReading => typeof reading.value === 'number',
   );
 
   if (!latest) {
     return 'none';
   }
 
-  if (typeof typical.max === 'number' && latest.value! > typical.max) {
+  if (typeof typical.max === 'number' && latest.value > typical.max) {
     return 'above';
   }
 
-  if (typeof typical.min === 'number' && latest.value! < typical.min) {
+  if (typeof typical.min === 'number' && latest.value < typical.min) {
     return 'below';
   }
 
