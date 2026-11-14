@@ -24,7 +24,7 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  min-height: calc(var(--tab-button-size) + var(--s-xl));
+  min-height: calc(var(--tab-button-size) + var(--tab-lift));
   padding: 0 var(--s-lg);
 }
 
@@ -66,7 +66,7 @@
 
 /* Me and Jano sit a little above the two middle tabs. */
 .lifted {
-  margin-bottom: var(--s-xl);
+  margin-bottom: var(--tab-lift);
 }
 
 .label {
@@ -76,10 +76,10 @@
 /* The wordmark sits between the lifted pair, as in the reference. */
 .wordmark {
   position: absolute;
-  top: var(--s-xs);
+  top: 2px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 700;
   letter-spacing: -0.02em;
   background: linear-gradient(90deg, #e0309b 0%, #6b3fd4 55%, #3b2bb8 100%);

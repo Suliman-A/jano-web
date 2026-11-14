@@ -41,8 +41,10 @@
   /* Layout */
   --screen-padding: 20px;
   --app-width: 430px;
-  --tab-bar-height: 120px;
+  --tab-bar-height: 132px;
   --tab-button-size: 74px;
+  /* How far Me and Jano sit above the two middle tabs. */
+  --tab-lift: 32px;
 
   /* Motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);

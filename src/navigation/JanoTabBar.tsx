@@ -75,14 +75,14 @@ export const JanoTabBar = (): React.JSX.Element => {
   };
 
   /**
-   * Whether a tab owns the current route. A pushed screen such as a booth's
-   * detail keeps its parent tab lit, and nothing is lit while the Me menu is
-   * open except Me itself.
-   * @param path - The tab's root path.
+   * Whether a tab owns the current route. A screen pushed on top of a tab —
+   * a booth's detail, the pass, the booth simulator — keeps that tab lit, and
+   * nothing is lit while the Me menu is open except Me itself.
+   * @param paths - Every path this tab owns.
    * @returns {boolean} - True when this tab is the active one.
    */
-  const isActive = (path: string): boolean =>
-    !meMenu.isOpen && pathname.startsWith(path);
+  const isActive = (...paths: string[]): boolean =>
+    !meMenu.isOpen && paths.some((path) => pathname.startsWith(path));
 
   return (
     <nav aria-label="Main" className={styles.bar} data-testid="jano-tab-bar">
@@ -108,7 +108,11 @@ export const JanoTabBar = (): React.JSX.Element => {
           />
           <TabButton
             icon="tabTemple"
-            isActive={isActive(routes.temple)}
+            isActive={isActive(
+              routes.temple,
+              routes.pass,
+              routes.boothSimulator,
+            )}
             label="Temple"
             onClick={() => go(routes.temple)}
           />
