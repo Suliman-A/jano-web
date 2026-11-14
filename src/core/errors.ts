@@ -9,8 +9,6 @@ import type { VisitEventType, VisitStatus } from '@/core/types';
 export enum JanoErrorCode {
   /** The booth is not accepting visits right now. */
   BoothUnavailable = 'booth_unavailable',
-  /** Presented too early or after the slot ended. */
-  CheckInWindowClosed = 'check_in_window_closed',
   /** The visit is not in a status that allows this step. */
   IllegalTransition = 'illegal_transition',
   /** The code uses a format this booth does not understand. */
@@ -44,12 +42,6 @@ export type JanoFailure =
       code: JanoErrorCode.BoothUnavailable;
     }
   | {
-      code: JanoErrorCode.CheckInWindowClosed;
-      closesAt: number;
-      now: number;
-      opensAt: number;
-    }
-  | {
       code: JanoErrorCode.IllegalTransition;
       event: VisitEventType;
       from: VisitStatus;
@@ -81,7 +73,6 @@ export type JanoFailure =
 
 const MESSAGES: Record<JanoErrorCode, string> = {
   [JanoErrorCode.BoothUnavailable]: 'This Temple is closed for maintenance.',
-  [JanoErrorCode.CheckInWindowClosed]: 'This pass is not valid at this time.',
   [JanoErrorCode.IllegalTransition]: 'That step is not possible right now.',
   [JanoErrorCode.PassBadVersion]: 'This pass uses an unsupported format.',
   [JanoErrorCode.PassMalformed]: 'This is not a Jano pass.',

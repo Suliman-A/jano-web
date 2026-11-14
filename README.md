@@ -88,12 +88,7 @@ same code, or switch the simulator to a different booth before scanning.
     UI, so a reviewer is never unsure which side they are looking at. It starts
     on the booth the waiting pass was issued for, and warns you when a booth
     you pick yourself will refuse the scan.
-12. **Check-in opens two hours before the slot**, where a real booth would use
-    about fifteen minutes. The prototype cannot travel in time, so a tight
-    window would make the flow impossible to demonstrate without waiting. The
-    rule is unchanged and still tested from both sides — see `CHECK_IN_LEAD_MS`
-    in [`src/core/visitMachine.ts`](src/core/visitMachine.ts).
-13. **Hash routing.** The build is static, so a hash route needs no server
+12. **Hash routing.** The build is static, so a hash route needs no server
     rewrite rule and reloading on `/temple` cannot 404 wherever it is hosted.
 
 ### How the patient app updates without a refresh
@@ -142,15 +137,16 @@ still refuse a pass without reaching a server:
 | `PASS_WRONG_BOOTH` — issued for a different Temple                           | `verifyPass`, [`:116`](src/core/pass.ts#L116)                                                             |
 
 **Against the store** — `checkIn`,
-[`src/api/mock/backend.ts:208`](src/api/mock/backend.ts#L208):
+[`src/api/mock/backend.ts:207`](src/api/mock/backend.ts#L207):
 
-| Reason                                                                    | Where                                                                                                                                                             |
-| ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `PASS_UNKNOWN` — no such pass on record                                   | [`:228`](src/api/mock/backend.ts#L228)                                                                                                                            |
-| `PASS_USED` — scanned once already                                        | [`:235`](src/api/mock/backend.ts#L235)                                                                                                                            |
-| `PASS_WRONG_PATIENT` — the code names someone other than the booking      | [`:245`](src/api/mock/backend.ts#L245)                                                                                                                            |
-| `BOOTH_UNAVAILABLE` — the booth is in maintenance                         | [`:258`](src/api/mock/backend.ts#L258)                                                                                                                            |
-| `ILLEGAL_TRANSITION`, `CHECK_IN_WINDOW_CLOSED` — the visit itself refuses | `applyVisitEvent`, [`src/core/visitMachine.ts:77`](src/core/visitMachine.ts#L77) ([`:85`](src/core/visitMachine.ts#L85), [`:105`](src/core/visitMachine.ts#L105)) |
+| Reason                                                                                                      | Where                                                                                                                    |
+| ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `PASS_UNKNOWN` — no such pass on record                                                                     | [`:227`](src/api/mock/backend.ts#L227)                                                                                   |
+| `PASS_USED` — scanned once already                                                                          | [`:234`](src/api/mock/backend.ts#L234)                                                                                   |
+| `PASS_WRONG_PATIENT` — the code names someone other than the booking                                        | [`:244`](src/api/mock/backend.ts#L244)                                                                                   |
+| `BOOTH_UNAVAILABLE` — the booth is in maintenance                                                           | [`:257`](src/api/mock/backend.ts#L257)                                                                                   |
+| `ILLEGAL_TRANSITION` — the visit is not in a state that can be checked into                                 | `applyVisitEvent`, [`src/core/visitMachine.ts:50`](src/core/visitMachine.ts#L50) ([`:58`](src/core/visitMachine.ts#L58)) |
+| `PASS_WRONG_BOOTH` again — the state machine re-checks it against the booking rather than trusting the code | [`src/core/visitMachine.ts:67`](src/core/visitMachine.ts#L67)                                                            |
 
 Every code is in `JanoErrorCode`,
 [`src/core/errors.ts:9`](src/core/errors.ts#L9).
@@ -166,7 +162,7 @@ something true. See
 ### 2. What is inside the QR code, and why?
 
 A readable, dot-separated string. The fields are `PassPayload`,
-[`src/core/types.ts:103`](src/core/types.ts#L103); the grammar is documented at
+[`src/core/types.ts:100`](src/core/types.ts#L100); the grammar is documented at
 [`src/core/pass.ts:1`](src/core/pass.ts#L1) and built by `encodePass`,
 [`src/core/pass.ts:30`](src/core/pass.ts#L30):
 
@@ -255,8 +251,8 @@ Three things keep them honest:
 
 - **Assert the specific error code**, never just "it rejected". Half of these
   failures are reachable by two different code paths.
-- **No `Date.now()` in `src/core/`.** The clock is injected, so window logic
-  that is an hour out cannot pass at midday and fail at 23:45.
+- **No `Date.now()` in `src/core/`.** The clock arrives with the call, so a
+  pass-expiry test cannot pass at midday and fail at 23:45.
 - **`resetStore()` in a global `beforeEach`.** Vitest's `restoreMocks` does not
   reach module-level state.
 
@@ -281,8 +277,6 @@ line has moved. Run it with `npm run check:docs`.
   five items as the reference screens do; only Consultation History works, and
   the other four are disabled rather than looking live and doing nothing.
 - **The Jano assistant**, which is a placeholder.
-- **Cancelling a booking.** The rule exists and is tested in the state machine,
-  but no screen calls it.
 - **i18n and custom fonts**, to keep the dependency list and the build short.
 
 ## What I'd do next

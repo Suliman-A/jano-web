@@ -16,18 +16,14 @@ import { BackLink } from '@/navigation/BackLink';
 import { routes } from '@/navigation/routes';
 
 const STATUS_TONE = {
-  cancelled: 'neutral',
   checked_in: 'brand',
   completed: 'success',
-  no_show: 'warning',
   scheduled: 'brand',
 } as const;
 
 const STATUS_TEXT = {
-  cancelled: 'Cancelled',
   checked_in: 'In progress',
   completed: 'Completed',
-  no_show: 'Missed',
   scheduled: 'Upcoming',
 } as const;
 

@@ -13,23 +13,10 @@ import type {
   VisitStatus,
 } from '@/core/types';
 
-/**
- * How early a patient may check in before their slot starts.
- *
- * Two hours is generous for a real booth, where fifteen minutes would be
- * normal. It is deliberate: the prototype has no way to travel in time, so a
- * tight window would make the flow impossible to demonstrate without waiting
- * for the slot to come round. The rule itself is unchanged — presenting a pass
- * outside the window is still refused, and still tested both ways.
- */
-export const CHECK_IN_LEAD_MS = 2 * 60 * 60 * 1000;
-
 export type VisitEvent =
   | { at: number; boothId: string; type: 'CHECK_IN' }
   | { at: number; reading: VisitReading; type: 'RECORD_READING' }
-  | { at: number; type: 'CANCEL' }
-  | { at: number; type: 'CHECK_OUT' }
-  | { at: number; type: 'EXPIRE' };
+  | { at: number; type: 'CHECK_OUT' };
 
 /**
  * Every legal move, as data. An event missing from a status's row is refused,
@@ -38,11 +25,9 @@ export type VisitEvent =
 export const TRANSITIONS: Readonly<
   Record<VisitStatus, Partial<Record<VisitEventType, VisitStatus>>>
 > = {
-  cancelled: {},
   checked_in: { CHECK_OUT: 'completed', RECORD_READING: 'checked_in' },
   completed: {},
-  no_show: {},
-  scheduled: { CANCEL: 'cancelled', CHECK_IN: 'checked_in', EXPIRE: 'no_show' },
+  scheduled: { CHECK_IN: 'checked_in' },
 };
 
 /**
@@ -55,18 +40,6 @@ export const canTransition = (
   from: VisitStatus,
   event: VisitEventType,
 ): boolean => TRANSITIONS[from][event] !== undefined;
-
-/**
- * The window during which a pass may be presented at the booth.
- * @param visit - The visit to measure.
- * @returns {{ closesAt: number; opensAt: number }} - The window bounds.
- */
-const checkInWindow = (
-  visit: Visit,
-): { closesAt: number; opensAt: number } => ({
-  closesAt: visit.scheduledUntil,
-  opensAt: visit.scheduledFor - CHECK_IN_LEAD_MS,
-});
 
 /**
  * Applies one step of the lifecycle.
@@ -88,23 +61,12 @@ export const applyVisitEvent = (
     });
   }
 
-  const { closesAt, opensAt } = checkInWindow(visit);
-
   if (event.type === 'CHECK_IN') {
     if (event.boothId !== visit.boothId) {
       return err({
         code: JanoErrorCode.PassWrongBooth,
         passBoothId: visit.boothId,
         scanningBoothId: event.boothId,
-      });
-    }
-
-    if (event.at < opensAt || event.at > closesAt) {
-      return err({
-        closesAt,
-        code: JanoErrorCode.CheckInWindowClosed,
-        now: event.at,
-        opensAt,
       });
     }
 
@@ -119,31 +81,5 @@ export const applyVisitEvent = (
     });
   }
 
-  if (event.type === 'CHECK_OUT') {
-    return ok({ ...visit, checkedOutAt: event.at, status: next });
-  }
-
-  if (event.type === 'CANCEL') {
-    if (event.at >= visit.scheduledFor) {
-      return err({
-        closesAt,
-        code: JanoErrorCode.CheckInWindowClosed,
-        now: event.at,
-        opensAt,
-      });
-    }
-
-    return ok({ ...visit, cancelledAt: event.at, status: next });
-  }
-
-  if (event.at <= visit.scheduledUntil) {
-    return err({
-      closesAt,
-      code: JanoErrorCode.CheckInWindowClosed,
-      now: event.at,
-      opensAt,
-    });
-  }
-
-  return ok({ ...visit, status: next });
+  return ok({ ...visit, checkedOutAt: event.at, status: next });
 };

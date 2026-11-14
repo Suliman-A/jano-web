@@ -25,11 +25,11 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
  */
 const EXPECTATIONS = {
   'src/api/mock/backend.ts': {
-    208: 'const checkIn',
-    228: 'PassUnknown',
-    235: 'PassUsed',
-    245: 'PassWrongPatient',
-    258: 'BoothUnavailable',
+    207: 'const checkIn',
+    227: 'PassUnknown',
+    234: 'PassUsed',
+    244: 'PassWrongPatient',
+    257: 'BoothUnavailable',
   },
   'src/core/errors.ts': {
     9: 'enum JanoErrorCode',
@@ -47,12 +47,12 @@ const EXPECTATIONS = {
     116: 'PassWrongBooth',
   },
   'src/core/types.ts': {
-    103: 'export type PassPayload',
+    100: 'export type PassPayload',
   },
   'src/core/visitMachine.ts': {
-    77: 'export const applyVisitEvent',
-    85: 'IllegalTransition',
-    105: 'CheckInWindowClosed',
+    50: 'export const applyVisitEvent',
+    58: 'IllegalTransition',
+    67: 'PassWrongBooth',
   },
 };
 

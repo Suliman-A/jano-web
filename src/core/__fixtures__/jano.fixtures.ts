@@ -85,7 +85,6 @@ export const DURING_SLOT = SLOT_STARTS_AT + MINUTE_MS;
 export const makeVisit = (overrides: Partial<Visit> = {}): Visit => ({
   bookingId: BOOKING_ID,
   boothId: BOOTH_AYALA_ID,
-  cancelledAt: null,
   checkedInAt: null,
   checkedOutAt: null,
   id: VISIT_ID,

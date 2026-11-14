@@ -159,7 +159,6 @@ const book = (body: { patientId: string; slotId: string }) =>
       const visit: Visit = {
         bookingId,
         boothId: slot.boothId,
-        cancelledAt: null,
         checkedInAt: null,
         checkedOutAt: null,
         id: visitId,

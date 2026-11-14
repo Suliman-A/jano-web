@@ -53,16 +53,13 @@ export type VisitReading = Reading & {
   metricKey: MetricKey;
 };
 
-export type VisitStatus =
-  'cancelled' | 'checked_in' | 'completed' | 'no_show' | 'scheduled';
+export type VisitStatus = 'checked_in' | 'completed' | 'scheduled';
 
-export type VisitEventType =
-  'CANCEL' | 'CHECK_IN' | 'CHECK_OUT' | 'EXPIRE' | 'RECORD_READING';
+export type VisitEventType = 'CHECK_IN' | 'CHECK_OUT' | 'RECORD_READING';
 
 export type Visit = {
   bookingId: string;
   boothId: string;
-  cancelledAt: number | null;
   checkedInAt: number | null;
   checkedOutAt: number | null;
   id: string;
